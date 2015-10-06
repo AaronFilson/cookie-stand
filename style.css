@@ -1,8 +1,32 @@
-/*#listPikePlace {
-
+h1 {
+  font-family: 'Pacifico' cursive;
+  color: black;
 }
 
-#listBellevue {
-
+p {
+  font-family: Times serif;
+  color: #222222;
 }
-*/
+
+.data {
+  font-family: Helvetica sans-serif;
+  color: navy;
+}
+
+td {
+  font-family: Helvetica sans-serif;
+  color: navy;
+}
+
+li {
+  font-family: Helvetica sans-serif;
+  color: navy;
+}
+
+body {
+  background-color: #d09999;
+}
+
+div {
+  background-color: #ee9999;
+}
