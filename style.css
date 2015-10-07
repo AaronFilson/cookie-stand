@@ -30,3 +30,26 @@ body {
 div {
   background-color: #ee9999;
 }
+
+.last {
+  border: 1px solid black;
+  background-color: none;
+  background-image: url(img/salmon.png);
+  height: 245px;
+  width: 790px;
+  border-radius: 2px;
+  margin-top: 10px;
+  position: relative;
+  float: left;
+  display: inline-block;
+}
+
+.lorem-italic {
+  font-style: italic;
+}
+
+.lorem-italic-data {
+  font-style: italic;
+  font-family: Helvetica sans-serif;
+  color: navy;
+}

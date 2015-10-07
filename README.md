@@ -9,3 +9,8 @@ Update 2 added a css stylesheet and a style guide.
 Update 3 added the object constructor CookieStand, and refactored the code to use it.
 The constructor also calls the cookie function, and sends the info to the website.
 
+Update 4 : Featured the salmon logo on the style guide. Included logo on last
+node of index.html.
+
+Update 5 : Added lorem ipsum text to the style guide and styled with style.css.
+
