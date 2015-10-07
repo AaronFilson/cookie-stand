@@ -1,7 +1,8 @@
-h1 {
+h1, h2, h3 {
   font-family: 'Pacifico' cursive;
   color: black;
 }
+
 
 p {
   font-family: Times serif;
@@ -70,5 +71,22 @@ header {
 #merch {
   background-image: url(img/salmon-t-shirt.jpg);
   width: 324px;
-  height: 324px;
+  height: 314px;
+  margin: 20px;
+  padding: 5px;
+  display: inline-block;
+}
+
+#indexLocations {
+  font-size: 20px;
+  font-weight: bold;
+  width: 230px;
+  padding: 15px;
+  display: inline-block;
+}
+
+#fancyfish {
+  float: right;
+  display: inline-block;
+  padding: 40px;
 }
