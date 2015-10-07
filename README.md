@@ -14,3 +14,4 @@ node of index.html.
 
 Update 5 : Added lorem ipsum text to the style guide and styled with style.css.
 
+Update 6 : Added public page, moved sales info to sales.html.

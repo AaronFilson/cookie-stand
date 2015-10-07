@@ -31,6 +31,10 @@ div {
   background-color: #ee9999;
 }
 
+header {
+  background-color: #f5aaaa;
+}
+
 .last {
   border: 1px solid black;
   background-color: none;
@@ -52,4 +56,19 @@ div {
   font-style: italic;
   font-family: Helvetica sans-serif;
   color: navy;
+}
+
+#topLogo {
+  background-image: url(img/salmon-small.png);
+  border: 1px solid black;
+  border-radius: 2px;
+  padding: 8px;
+  width: 305px;
+  height: 85px;
+}
+
+#merch {
+  background-image: url(img/salmon-t-shirt.jpg);
+  width: 324px;
+  height: 324px;
 }
