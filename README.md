@@ -15,3 +15,7 @@ node of index.html.
 Update 5 : Added lorem ipsum text to the style guide and styled with style.css.
 
 Update 6 : Added public page, moved sales info to sales.html.
+
+Update 7 : Changed style of public page, added fancy fish, changed layout. Moved
+h2 out of merch background image, and tuned merch div.
+
