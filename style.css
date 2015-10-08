@@ -71,11 +71,11 @@ header {
 #merch {
   background-image: url(img/salmon-t-shirt.jpg);
   width: 324px;
-  height: 314px;
+  height: 312px;
   margin: 20px;
   padding: 5px;
   display: inline-block;
-  border: ridge;
+  border: 1px black solid;
 }
 
 #indexLocations {
