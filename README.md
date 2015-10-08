@@ -19,3 +19,5 @@ Update 6 : Added public page, moved sales info to sales.html.
 Update 7 : Changed style of public page, added fancy fish, changed layout. Moved
 h2 out of merch background image, and tuned merch div.
 
+Update 8 : Added links to public page, added border to merch, and started on table
+for the sales info.
