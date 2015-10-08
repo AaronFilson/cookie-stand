@@ -21,3 +21,5 @@ h2 out of merch background image, and tuned merch div.
 
 Update 8 : Added links to public page, added border to merch, and started on table
 for the sales info.
+
+Update 9 : Got the sales table printing.
