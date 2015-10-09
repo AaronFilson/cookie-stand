@@ -5,22 +5,22 @@ h1, h2, h3 {
 
 
 p {
-  font-family: Times serif;
-  color: #222222;
+  font-family: 'Times New Roman' Helvetica serif;
+  color: #333333;
 }
 
 .data {
-  font-family: Helvetica sans-serif;
+  font-family: 'Gill Sans' Arial sans-serif;
   color: navy;
 }
 
 td {
-  font-family: Helvetica sans-serif;
+  font-family: 'Gill Sans' Arial sans-serif;
   color: navy;
 }
 
 li {
-  font-family: Helvetica sans-serif;
+  font-family: 'Gill Sans' Arial sans-serif;
   color: navy;
 }
 
@@ -55,7 +55,7 @@ header {
 
 .lorem-italic-data {
   font-style: italic;
-  font-family: Helvetica sans-serif;
+  font-family: 'Gill Sans' Arial sans-serif;
   color: navy;
 }
 

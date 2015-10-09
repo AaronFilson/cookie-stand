@@ -29,3 +29,4 @@ Update 10 : Pair programming with Gina. Added input form to sales page.
 Update 11 : Got the input form to work, and display on the webpage. Edited for
 code style, added comments to app.js, and compacted sales.html a bit.
 
+Update 12 : Correct errors in style-guide and css files.
