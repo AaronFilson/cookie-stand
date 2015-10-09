@@ -1,4 +1,19 @@
 //function calls are at bottom of file
+var salesFormTag = document.getElementById('salesForm');
+//var salesFormButton = document.getElementById('salesInput');
+
+var handleSalesFormSubmit = function(event) {
+  event.preventDefault();
+  //check for null
+
+  var newStand = new CookieStand(event.target.locName.value,
+    event.target.minCust.value, event.target.maxCust.value,
+    event.target.cookiePerHour.value);
+  console.log('just tried to make a new cookie stand');
+
+  console.log(newStand);
+  //call append table.
+};
 //The CookieStand constructor.
 //Takes values for the name of the location, minimum customers, max customers,
 //cookies per customer, and the tag in the index file we are printing to.
@@ -79,4 +94,6 @@ var alki = new CookieStand('Alki Beach', 3, 24, 2.6);
 //print the table to the page
 var pageOneTable = new NumberOfCookiesTable([pikePlace, seaTac, southCenter, bellevueSq, alki]);
 
+//salesFormButton.addEventListener('click', handleSalesFormClick);
+salesFormTag.addEventListener('submit', handleSalesFormSubmit);
 
