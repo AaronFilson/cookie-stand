@@ -23,3 +23,10 @@ Update 8 : Added links to public page, added border to merch, and started on tab
 for the sales info.
 
 Update 9 : Got the sales table printing.
+
+Update 10 : Pair programming with Gina. Added input form to sales page.
+
+Update 11 : Got the input form to work, and display on the webpage. Edited for
+code style, added comments to app.js, and compacted sales.html a bit.
+
+Update 12 : Correct errors in style-guide and css files.
