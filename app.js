@@ -7,12 +7,12 @@ var handleSalesFormSubmit = function(event) {
   //check for null
 
   var newStand = new CookieStand(event.target.locName.value,
-    event.target.minCust.value, event.target.maxCust.value,
-    event.target.cookiePerHour.value);
+    ((event.target.minCust.value - 1) + 1), ((event.target.maxCust.value - 1) + 1),
+    ((event.target.cookiePerHour.value - 1) + 1));
   console.log('just tried to make a new cookie stand');
 
   console.log(newStand);
-  //call append table.
+  pageOneTable.appendTableRow(newStand);
 };
 //The CookieStand constructor.
 //Takes values for the name of the location, minimum customers, max customers,
@@ -31,8 +31,8 @@ var CookieStand = function (pName, pMin, pMax, pPerCust) {
   //function to total up cookies
   this.randCookieDay = function() {
     for (var i = 0; i < this.hoursOpen; i++) {
-      this.totalDayCookies += this.cookiesByHour[i] = (Math.floor(Math.random()
-        * (this.maxCust - this.minCust + 1)) + this.minCust);
+      this.totalDayCookies += this.cookiesByHour[i] = Math.floor(((Math.random()
+        * (this.maxCust - this.minCust + 1)) + this.minCust) * this.averagePerCust);
     }
   }
 
@@ -68,22 +68,31 @@ var NumberOfCookiesTable = function (pCookieStand) {
 
   //make the table body
   this.tBPointer = this.tableVarTag.appendChild(document.createElement('tbody'));
-  //make the data rows
   for (var j = 0; j < this.pCSarray.length; j++) {
-    //start with the name of the location
-    this.rowPointer = this.tBPointer.appendChild(document.createElement('tr'));
-    this.rowPointer.appendChild(document.createElement('th'));
-    this.rowPointer.lastChild.textContent = this.pCSarray[j].placeName;
-    //print cookies by hour
-    for (var k = 0; k < this.pCSarray[j].cookiesByHour.length; k++) {
-      this.rowPointer.appendChild(document.createElement('td'));
-      this.rowPointer.lastChild.textContent = this.pCSarray[j].cookiesByHour[k];
-    }
-    //print total cookies
-    this.rowPointer.appendChild(document.createElement('td'));
-    this.rowPointer.lastChild.textContent = this.pCSarray[j].totalDayCookies;
+    this.appendTableRow(this.pCSarray[j]);
   }
 }
+
+NumberOfCookiesTable.prototype.appendTableRow = function(latestStand){
+  console.log('top of appendTableRow with ' + latestStand.placeName);
+  this.cStandObj = latestStand;
+  this.appRowPointer = document.getElementById('salesTable').lastChild;
+
+ //make the data rows
+  //start with the name of the location
+  this.rowPointer = this.appRowPointer.appendChild(document.createElement('tr'));
+  this.rowPointer.appendChild(document.createElement('th'));
+  this.rowPointer.lastChild.textContent = this.cStandObj.placeName;
+  //print cookies by hour
+  for (var k = 0; k < latestStand.cookiesByHour.length; k++) {
+    this.rowPointer.appendChild(document.createElement('td'));
+    this.rowPointer.lastChild.textContent = this.cStandObj.cookiesByHour[k];
+  }
+  //print total cookies
+  this.rowPointer.appendChild(document.createElement('td'));
+  this.rowPointer.lastChild.textContent = this.cStandObj.totalDayCookies;
+};
+
 // make the cookie stands
 var pikePlace = new CookieStand('Pike Place Market', 17, 88, 5.2);
 var seaTac = new CookieStand('SeaTac Airport', 6, 44, 1.2);
