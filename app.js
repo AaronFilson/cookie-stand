@@ -1,23 +1,29 @@
+/*
+app.js
+Written by Aaron Filson, for the B34 Code Fellows Bootcamp
+This works with the sales.html file to show the sales projections
+for Pat's Cookie Stand. This version allows the user of the website
+to enter additional Cookie Stands, and displays the information in a table.
+There is essentially no error correction of user input in this version, the
+data disappears on close, and customer modeling is simply a random assigment.
+*/
 //function calls are at bottom of file
 var salesFormTag = document.getElementById('salesForm');
-//var salesFormButton = document.getElementById('salesInput');
-
+// the event hander function passed to the form submit. Makes a new object and
+// writes it to the webpage table when the form submit event fires.
 var handleSalesFormSubmit = function(event) {
   event.preventDefault();
-  //check for null
 
   var newStand = new CookieStand(event.target.locName.value,
     ((event.target.minCust.value - 1) + 1), ((event.target.maxCust.value - 1) + 1),
     ((event.target.cookiePerHour.value - 1) + 1));
-  console.log('just tried to make a new cookie stand');
 
-  console.log(newStand);
   pageOneTable.appendTableRow(newStand);
 };
+
 //The CookieStand constructor.
 //Takes values for the name of the location, minimum customers, max customers,
-//cookies per customer, and the tag in the index file we are printing to.
-
+//cookies per customer.
 var CookieStand = function (pName, pMin, pMax, pPerCust) {
 
   this.placeName = pName;
@@ -38,26 +44,25 @@ var CookieStand = function (pName, pMin, pMax, pPerCust) {
 
   this.randCookieDay(); //call the cookie func
 }
-
+// This makes a table of info out of an array of Cookie Stands, and starts
+// putting the info on the webpage. It then calls its own method appendTableRow
+// to work through the individual objects.
 var NumberOfCookiesTable = function (pCookieStand) {
+  //get the local copy of passed arg
   this.pCSarray = pCookieStand;
   //get element tag from doc for the table
   this.tableVarTag = document.getElementById('salesTable');
-  //get the table header setup
   this.hoursOpen = 8;
   this.hoursText = ['10am ', '11am ', '12pm ', '1pm ', '2pm ',
   '3pm ', '4pm ', '5pm '];
   //make the table head
   this.tableVarTag.appendChild(document.createElement('thead'));
-  //I need to get the 'hours of op' text centered before it makes sense, section on hold
-  // this.tableVarTag.lastChild.appendChild(document.createElement('tr'));
-  // this.tableVarTag.lastChild.lastChild.appendChild(document.createElement('th'));
-  // this.tableVarTag.lastChild.lastChild.lastChild.textContent = 'Hours of Operation';
   this.tBPointer = this.tableVarTag.lastChild;
   this.rowPointer = this.tBPointer.appendChild(document.createElement('tr'));
   //make the hours headers
   this.headerPointer = this.rowPointer.appendChild(document.createElement('th'));
     this.headerPointer.textContent = ''; //spacer place in table
+    //print the hours of operation at the top of the table
   for (var i = 0; i < this.hoursText.length; i++) {
     this.headerPointer = this.rowPointer.appendChild(document.createElement('th'));
     this.headerPointer.textContent = this.hoursText[i];
@@ -69,10 +74,12 @@ var NumberOfCookiesTable = function (pCookieStand) {
   //make the table body
   this.tBPointer = this.tableVarTag.appendChild(document.createElement('tbody'));
   for (var j = 0; j < this.pCSarray.length; j++) {
-    this.appendTableRow(this.pCSarray[j]);
+    this.appendTableRow(this.pCSarray[j]); //call our own method on each object
   }
 }
 
+//this method of Num... takes a CookieStand object as arg, then sends it to the
+//last child of the table tree.
 NumberOfCookiesTable.prototype.appendTableRow = function(latestStand){
   console.log('top of appendTableRow with ' + latestStand.placeName);
   this.cStandObj = latestStand;
@@ -102,7 +109,6 @@ var alki = new CookieStand('Alki Beach', 3, 24, 2.6);
 
 //print the table to the page
 var pageOneTable = new NumberOfCookiesTable([pikePlace, seaTac, southCenter, bellevueSq, alki]);
-
-//salesFormButton.addEventListener('click', handleSalesFormClick);
+//Make the event listener point to the form submit
 salesFormTag.addEventListener('submit', handleSalesFormSubmit);
 
