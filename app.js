@@ -15,10 +15,26 @@ var handleSalesFormSubmit = function(event) {
   event.preventDefault();
 
   var newStand = new CookieStand(event.target.locName.value,
-    ((event.target.minCust.value - 1) + 1), ((event.target.maxCust.value - 1) + 1),
-    ((event.target.cookiePerHour.value - 1) + 1));
+      ((event.target.minCust.value - 1) + 1), ((event.target.maxCust.value - 1) + 1),
+      ((event.target.cookiePerHour.value - 1) + 1));
 
-  pageOneTable.appendTableRow(newStand);
+  //check if there is a cookie stand to replace
+  var decisionAndIndex = doesTheCookieStandAlreadyExist(newStand);
+
+  if(decisionAndIndex > 0) {
+    //update the existing object
+    arrayOfCookieStands[decisionAndIndex] = newStand;
+
+    replaceTheInfo(arrayOfCookieStands[decisionAndIndex]);
+
+  } else {
+
+    arrayOfCookieStands.push(newStand);
+
+    pageOneTable.appendTableRow(newStand);
+  }
+
+
 };
 
 //The CookieStand constructor.
@@ -34,6 +50,7 @@ var CookieStand = function (pName, pMin, pMax, pPerCust) {
   this.totalDayCookies = 0;
   this.cookiesByHour = [null];
   this.elTag = document.getElementById('salesTable');
+  this.nwsName = stripWhiteSpace(pName); //make a shortened name for id purposes
   //function to total up cookies
   this.randCookieDay = function() {
     for (var i = 0; i < this.hoursOpen; i++) {
@@ -47,7 +64,7 @@ var CookieStand = function (pName, pMin, pMax, pPerCust) {
 // This makes a table of info out of an array of Cookie Stands, and starts
 // putting the info on the webpage. It then calls its own method appendTableRow
 // to work through the individual objects.
-var NumberOfCookiesTable = function (pCookieStand) {
+var numberOfCookiesTable = function (pCookieStand) {
   //get the local copy of passed arg
   this.pCSarray = pCookieStand;
   //get element tag from doc for the table
@@ -78,9 +95,28 @@ var NumberOfCookiesTable = function (pCookieStand) {
   }
 }
 
+var replaceTheInfo = function(updateStandObj) {
+  //find the table row location
+  var replacePointer =  document.getElementById(updateStandObj.nwsName);
+
+  //delete existing info
+  replacePointer.innerHTML = null;
+
+  replacePointer.appendChild(document.createElement('th'));
+  replacePointer.lastChild.textContent = updateStandObj.placeName;
+  //print cookies by hour
+  for (var k = 0; k < updateStandObj.cookiesByHour.length; k++) {
+    replacePointer.appendChild(document.createElement('td'));
+    replacePointer.lastChild.textContent = updateStandObj.cookiesByHour[k];
+  }
+  //print total cookies
+  replacePointer.appendChild(document.createElement('td'));
+  replacePointer.lastChild.textContent = updateStandObj.totalDayCookies;
+};
+
 //this method of Num... takes a CookieStand object as arg, then sends it to the
 //last child of the table tree.
-NumberOfCookiesTable.prototype.appendTableRow = function(latestStand){
+numberOfCookiesTable.prototype.appendTableRow = function(latestStand){
   console.log('top of appendTableRow with ' + latestStand.placeName);
   this.cStandObj = latestStand;
   this.appRowPointer = document.getElementById('salesTable').lastChild;
@@ -88,6 +124,7 @@ NumberOfCookiesTable.prototype.appendTableRow = function(latestStand){
  //make the data rows
   //start with the name of the location
   this.rowPointer = this.appRowPointer.appendChild(document.createElement('tr'));
+  this.rowPointer.id = latestStand.nwsName;
   this.rowPointer.appendChild(document.createElement('th'));
   this.rowPointer.lastChild.textContent = this.cStandObj.placeName;
   //print cookies by hour
@@ -100,15 +137,35 @@ NumberOfCookiesTable.prototype.appendTableRow = function(latestStand){
   this.rowPointer.lastChild.textContent = this.cStandObj.totalDayCookies;
 };
 
+var doesTheCookieStandAlreadyExist = function(testStandObj){
+
+  for(var i = 0; i < arrayOfCookieStands.length; i++) {
+    if(testStandObj.placeName === arrayOfCookieStands[i].placeName) {
+      return i;
+    }
+  }
+  return -1; //magic value to indicate not found
+};
+
+
+var stripWhiteSpace = function (aNameToStrip){
+  var sendBackString = aNameToStrip;
+  //hooray for regex magic!
+  sendBackString = sendBackString.replace(/ /g, '_');
+  console.log(sendBackString);
+  return sendBackString;
+}
+
 // make the cookie stands
-var pikePlace = new CookieStand('Pike Place Market', 17, 88, 5.2);
-var seaTac = new CookieStand('SeaTac Airport', 6, 44, 1.2);
-var southCenter = new CookieStand('South Center Mall', 11, 38, 1.9);
-var bellevueSq = new CookieStand('Bellevue Square Mall', 20, 48, 3.3);
-var alki = new CookieStand('Alki Beach', 3, 24, 2.6);
+var arrayOfCookieStands = [];
+arrayOfCookieStands[0] = new CookieStand('Pike Place Market', 17, 88, 5.2);
+arrayOfCookieStands[1] = new CookieStand('SeaTac Airport', 6, 44, 1.2);
+arrayOfCookieStands[2] = new CookieStand('South Center Mall', 11, 38, 1.9);
+arrayOfCookieStands[3] = new CookieStand('Bellevue Square Mall', 20, 48, 3.3);
+arrayOfCookieStands[4] = new CookieStand('Alki Beach', 3, 24, 2.6);
 
 //print the table to the page
-var pageOneTable = new NumberOfCookiesTable([pikePlace, seaTac, southCenter, bellevueSq, alki]);
+var pageOneTable = new numberOfCookiesTable(arrayOfCookieStands);
 //Make the event listener point to the form submit
 salesFormTag.addEventListener('submit', handleSalesFormSubmit);
 

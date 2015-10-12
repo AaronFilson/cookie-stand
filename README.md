@@ -30,3 +30,6 @@ Update 11 : Got the input form to work, and display on the webpage. Edited for
 code style, added comments to app.js, and compacted sales.html a bit.
 
 Update 12 : Correct errors in style-guide and css files.
+
+Update 13 : Adding a replacement ability to the input on the sales page.
+It can replace the info of a cookie stand that is matched by name.
